@@ -1,0 +1,31 @@
+Dataset of 1000 people
+Out of 1000 say 10% responded to the campaign;
+
+Split into 2 parts - Training(70%) and Validation(30%)
+
+Customers in validation data set are : 300
+Responders in validation data set are : 10% of 300 = 30
+Decile is 10%
+
+First 10% of the sorted validation set: 30
+out of the first 30 people only 9 of the responders were correctly identified
+gain of responders is 9/30 = 30%
+
+Next 10% (i.e 20%) of the sorted validation set: 30
+out of the next 30 people only 6 were actual responders
+gain of responders is 6/30 = 20%
+cumulative gain = 30% + 20% = 50%
+
+next 10% (i.e 30&) of the sorted validation set : 30
+out of next 30 people only 4.5 responded
+gain of responders = 4.5/30 = 15%
+cumulative gain = 30% + 20% + 15% = 65%
+
+Categorical - they are categories like fraudulent/authorized
+ - Nominal - where order doesn’t matter
+	colors, Purchase/notPurchase, gender
+ - Ordinal - where order matters
+	likertScale(1-5), good/better/best
+
+Continuous - where we can take difference
+Age, income

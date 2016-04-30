@@ -1,0 +1,267 @@
+
+> HousePrice <- read.table("/Users/Deepti/Documents/MSIS/Data Mining/HousePrice.csv", header=TRUE, sep=",", 
++   na.strings="NA", dec=",", strip.white=TRUE)
+
+> summary(HousePrice)
+     HomeID           Price             SqFt         Bedrooms       Bathrooms         Offers      Brick   
+ Min.   :  1.00   Min.   : 69100   Min.   :1450   Min.   :2.000   Min.   :2.000   Min.   :1.000   No :86  
+ 1st Qu.: 32.75   1st Qu.:111325   1st Qu.:1880   1st Qu.:3.000   1st Qu.:2.000   1st Qu.:2.000   Yes:42  
+ Median : 64.50   Median :125950   Median :2000   Median :3.000   Median :2.000   Median :3.000           
+ Mean   : 64.50   Mean   :130427   Mean   :2001   Mean   :3.023   Mean   :2.445   Mean   :2.578           
+ 3rd Qu.: 96.25   3rd Qu.:148250   3rd Qu.:2140   3rd Qu.:3.000   3rd Qu.:3.000   3rd Qu.:3.000           
+ Max.   :128.00   Max.   :211200   Max.   :2590   Max.   :5.000   Max.   :4.000   Max.   :6.000           
+ Neighborhood
+ East :45    
+ North:44    
+ West :39    
+             
+             
+             
+
+> library(abind, pos=4)
+
+> library(e1071, pos=4)
+
+> numSummary(HousePrice[,"SqFt"], groups=HousePrice$Neighborhood, statistics=c("mean", "sd", "IQR", 
++   "quantiles"), quantiles=c(0,.25,.5,.75,1))
+          mean       sd IQR   0%  25%  50%  75% 100% data:n
+East  2014.000 201.3635 250 1560 1900 2010 2150 2440     45
+North 1916.818 198.0812 285 1450 1770 1930 2055 2290     44
+West  2080.769 208.1293 285 1720 1925 2080 2210 2590     39
+
+> numSummary(HousePrice[,"SqFt"], groups=HousePrice$Neighborhood, statistics=c("mean", "sd", "IQR", 
++   "quantiles"), quantiles=c(0,.25,.5,.75,1))
+          mean       sd IQR   0%  25%  50%  75% 100% data:n
+East  2014.000 201.3635 250 1560 1900 2010 2150 2440     45
+North 1916.818 198.0812 285 1450 1770 1930 2055 2290     44
+West  2080.769 208.1293 285 1720 1925 2080 2210 2590     39
+
+> library(relimp, pos=4)
+
+> showData(HousePrice, placement='-20+200', font=getRcmdr('logFont'), maxwidth=80, maxheight=30)
+
+> Hist(HousePrice$SqFt, scale="frequency", breaks=3, col="darkgray")
+
+> Hist(HousePrice$SqFt, scale="frequency", breaks=3, col="darkgray")
+
+> names(HousePrice)
+[1] "HomeID"       "Price"        "SqFt"         "Bedrooms"     "Bathrooms"    "Offers"       "Brick"       
+[8] "Neighborhood"
+
+> HousePrice$SqFt.cat <- with(HousePrice, SqFt)
+
+> Hist(HousePrice$SqFt.cat, scale="frequency", breaks=3, col="darkgray", xlab="Small", ylab="Medium", 
++   main="High")
+
+> HousePrice$SqFt.cat <- NULL
+
+> HousePrice$SqFt.cat <- bin.var(HousePrice$SqFt, bins=3, method='intervals', labels=c('small','medium',
++   'large'))
+
+> .Table <- table(HousePrice$SqFt.cat)
+
+> .Table  # counts for SqFt.cat
+
+ small medium  large 
+    25     85     18 
+
+> round(100*.Table/sum(.Table), 2)  # percentages for SqFt.cat
+
+ small medium  large 
+ 19.53  66.41  14.06 
+
+> remove(.Table)
+
+> HousePrice$New1Neighbourhood <- with(HousePrice, Neighborhood)
+
+> HousePrice$New1Neighbourhood <- with(HousePrice, Neighborhood)
+
+> showData(HousePrice, placement='-20+200', font=getRcmdr('logFont'), maxwidth=80, maxheight=30)
+
+> fix(HousePrice)
+
+> fix(HousePrice)
+
+> fix(HousePrice)
+
+> HousePrice$New2Neighbourhood <- Recode(HousePrice$Neighborhood, 'North; Non-North', as.factor.result=TRUE)
+
+> HousePrice$New1Neighbourhood <- NULL
+
+> HousePrice$New1Neighbourhood <- with(HousePrice, East)
+
+> HousePrice$ObsNumber <- 1:128
+
+> library(sem, pos=4)
+
+> HousePrice$New1Neighbourhood <- Recode(HousePrice$Neighborhood, 'East	; Non-East;', as.factor.result=TRUE)
+
+> .Table <- table(HousePrice$Neighborhood)
+
+> .Table  # counts for Neighborhood
+
+ East North  West 
+   45    44    39 
+
+> round(100*.Table/sum(.Table), 2)  # percentages for Neighborhood
+
+ East North  West 
+35.16 34.38 30.47 
+
+> remove(.Table)
+
+> HousePrice$New1Neighbourhood <- with(HousePrice, East)
+
+> HousePrice$New1Neighbourhood <- Recode(HousePrice$Neighborhood, '"East" = "East"; "North" = "Non-East";', 
++   as.factor.result=TRUE)
+
+> showData(HousePrice, placement='-20+200', font=getRcmdr('logFont'), maxwidth=80, maxheight=30)
+
+> HousePrice$New1Neighbourhood <- Recode(HousePrice$Neighborhood, 
++   '"East" = "East"; "North" = "Non-East"; "West" = "Non-East"; ;', as.factor.result=TRUE)
+
+> HousePrice$New2Neighbourhood <- Recode(HousePrice$Neighborhood, 
++   '"East" = "Non-North"; "North" = "North"; "West" = "Non-North"; ; ;', as.factor.result=TRUE)
+
+> HousePrice$New3Neighbourhood <- Recode(HousePrice$Neighborhood, 
++   '"East" = "Non-West"; "North" = "Non-West"; "West" = "West"; ; ; ;', as.factor.result=TRUE)
+
+> showData(HousePrice, placement='-20+200', font=getRcmdr('logFont'), maxwidth=80, maxheight=30)
+
+> showData(HousePrice, placement='-20+200', font=getRcmdr('logFont'), maxwidth=80, maxheight=30)
+
+> showData(HousePrice, placement='-20+200', font=getRcmdr('logFont'), maxwidth=80, maxheight=30)
+
+> Boxplot(Price~Neighborhood, data=HousePrice, id.method="y")
+[1] "29"  "26"  "119"
+
+> Boxplot(Price~New1Neighbourhood, data=HousePrice, id.method="y")
+
+> Boxplot(Price~New2Neighbourhood, data=HousePrice, id.method="y")
+[1] "104" "29"  "26"  "119"
+
+> Boxplot(Price~New1Neighbourhood, data=HousePrice, id.method="y")
+
+> Boxplot(Price~Neighborhood, data=HousePrice, id.method="y")
+[1] "29"  "26"  "119"
+
+> Boxplot(Price~New2Neighbourhood, data=HousePrice, id.method="y")
+[1] "104" "29"  "26"  "119"
+
+> Boxplot(Price~New3Neighbourhood, data=HousePrice, id.method="y")
+[1] "29"
+
+> Boxplot(Price~Brick, data=HousePrice, id.method="y")
+
+> Boxplot(Offers~Brick, data=HousePrice, id.method="y")
+[1] "48"  "101" "102"
+
+> Boxplot(Offers~Neighborhood, data=HousePrice, id.method="y")
+[1] "102"
+
+> Boxplot(Offers~New1Neighbourhood, data=HousePrice, id.method="y")
+[1] "102" "14"  "48"  "101"
+
+> Boxplot(Offers~New2Neighbourhood, data=HousePrice, id.method="y")
+
+> Boxplot(Offers~New3Neighbourhood, data=HousePrice, id.method="y")
+[1] "14"  "48"  "101" "102"
+
+> Boxplot(Offers~Neighborhood, data=HousePrice, id.method="y")
+[1] "102"
+
+> Boxplot(Offers~Brick, data=HousePrice, id.method="y")
+[1] "48"  "101" "102"
+
+> .Table <- table(HousePrice$Brick)
+
+> .Table  # counts for Brick
+
+ No Yes 
+ 86  42 
+
+> round(100*.Table/sum(.Table), 2)  # percentages for Brick
+
+   No   Yes 
+67.19 32.81 
+
+> remove(.Table)
+
+> Loan <- read.table("/Users/Deepti/Documents/MSIS/Data Mining/Loan.csv", header=TRUE, sep=",", 
++   na.strings="NA", dec=".", strip.white=TRUE)
+
+> fix(Loan)
+
+> .Table <- table(Loan$Credit.Grade)
+
+> .Table  # counts for Credit.Grade
+
+   A   AA    B    C    D    E   HR   NC 
+ 422  450  549  835  923 1117 1176   64 
+
+> round(100*.Table/sum(.Table), 2)  # percentages for Credit.Grade
+
+    A    AA     B     C     D     E    HR    NC 
+ 7.62  8.13  9.92 15.08 16.67 20.18 21.24  1.16 
+
+> .Table <- table(Loan$Status)
+
+> .Table  # counts for Status
+
+Current    Late 
+   5186     350 
+
+> round(100*.Table/sum(.Table), 2)  # percentages for Status
+
+Current    Late 
+  93.68    6.32 
+
+> remove(.Table)
+
+> Loan$NewCG <- Recode(Loan$Credit.Grade, 
++   '"AA = 8"; "A = 7"; "B = 6"; "C = 5"; "D = 4"; "E = 3"; "NC = 2"; "HR = 1"', as.factor.result=TRUE)
+
+> showData(Loan, placement='-20+200', font=getRcmdr('logFont'), maxwidth=80, maxheight=30)
+
+> Loan$NewCG <- Recode(Loan$Credit.Grade, 
++   '"AA" = "8"; "A" = "7"; "B" = "6"; "C" = "5"; "D" = "4"; "E" = "3"; "NC" = "2"; "HR" = "1";', 
++   as.factor.result=TRUE)
+
+> Loan$NewStatus <- Recode(Loan$Credit.Grade, '"Current" = "1"; "Late" = "1"', as.factor.result=TRUE)
+
+> showData(Loan, placement='-20+200', font=getRcmdr('logFont'), maxwidth=80, maxheight=30)
+
+> Loan$NewStatus <- Recode(Loan$Status, '"Current" = "1"; "Late" = "1";', as.factor.result=TRUE)
+
+> showData(Loan, placement='-20+200', font=getRcmdr('logFont'), maxwidth=80, maxheight=30)
+
+> Loan$NewStatus <- Recode(Loan$Status, '"Current" = "1"; "Late" = "0"; ;', as.factor.result=TRUE)
+
+> showData(Loan, placement='-20+200', font=getRcmdr('logFont'), maxwidth=80, maxheight=30)
+
+> .Table <- table(Loan$NewCG)
+
+> .Table  # counts for NewCG
+
+   1    2    3    4    5    6    7    8 
+1176   64 1117  923  835  549  422  450 
+
+> round(100*.Table/sum(.Table), 2)  # percentages for NewCG
+
+    1     2     3     4     5     6     7     8 
+21.24  1.16 20.18 16.67 15.08  9.92  7.62  8.13 
+
+> .Table <- table(Loan$NewStatus)
+
+> .Table  # counts for NewStatus
+
+   0    1 
+ 350 5186 
+
+> round(100*.Table/sum(.Table), 2)  # percentages for NewStatus
+
+    0     1 
+ 6.32 93.68 
+
+> remove(.Table)
+

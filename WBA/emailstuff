@@ -1,0 +1,70 @@
+Download: http://code.google.com/a/apache-extras.org/p/phpmailer/downloads/list
+
+Changes you want to make in your PHPMailer class 
+  public $Hostname          = '';
+  public $MessageID      = '';
+  public $Helo        = '';
+  public $From              = '';
+  $result .= $this->HeaderLine('X-Mailer', '']');
+
+To Send emails through your Microsoft Exchange server account (i.e. uxxxxxxxxx@utah.edu) using SMTP
+  	$mailer = new PHPMailer(); $mailer->IsSMTP(); $mailer->Host = 'smtp.utah.edu';
+	$mailer->SMTPAuth = true; $mailer->SMTPSecure = "tls"; $mailer->Port = '25';
+	$mailer->From = 'yourUtah.eduEmail'; $mailer->FromName = 'Your Name'; 
+	$mailer->Password = ''; $mailer->Username = 'uxxxxxxx@umail.utah.edu';//don't remove umail in domain
+	$mailer->AddAddress($email,$fullName);	$mailer->Subject = $subject; $mailer->Body = $body;
+	$send=$mailer->Send();
+	if (!$send) {
+		echo "Message was not sent";
+		echo "Mailer Error: " . $email." ".$mailer->ErrorInfo;
+		exit;
+	}
+	$mailer->ClearAddresses();
+	$mailer->SmtpClose();
+
+To Read/Move emails from your Microsoft Exchange server account using IMAP
+	$server="{imap.umail.utah.edu:993/ssl/novalidate-cert}";$otherBox="INBOX/MoveToFolder";
+	$mailFolder="{imap.umail.utah.edu:993/ssl/novalidate-cert}INBOX";
+	$mbox = imap_open($mailFolder, "uxxxxxxx@umail.utah.edu", $pwd);
+	if (!$mbox) {
+		echo imap_last_error();
+		echo "imap connection failed ".$j." <br>";
+		exit;
+	}
+	$num = imap_num_msg($mbox) ;
+	for($i=$num;$i>=1;$i--){ 		
+		echo $header=imap_headerinfo($mbox,$i)->subject;
+		//imap_mail_move($mbox, $i, $otherBox);
+		//imap_expunge($mbox);
+	}
+	imap_close($mbox);
+
+To Send record keeping email in your Microsoft Exchange server account using IMAP
+	$mailFolder="{imap.umail.utah.edu:993/ssl/novalidate-cert}INBOX/CreateYourFolder";
+	$mbox = imap_open($mailFolder, "uxxxxxxx@umail.utah.edu", $pwd);
+	$send="From: asdfas@utah.edu\r\n". "To: ".$emailWhomYouSentUsingSMTP."\r\n". "Subject: ".$subject."\r\n". "\r\n". $body."\r\n"
+	imap_append($mbox, $mailFolder, $send);
+	imap_close($mbox);
+
+
+To Send emails to GMail
+	mailer = new PHPMailer();
+	$mailer->IsSMTP(); // enable SMTP
+	$mailer->SMTPDebug = 0;  // debugging: 1 = errors and messages, 2 = messages only
+	$mailer->SMTPAuth = true;  // authentication enabled
+	$mailer->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
+	$mailer->Host = 'smtp.gmail.com';
+	$mailer->Port = 465; 
+	$mailer->Username = "yourGmailID";
+	$mailer->Password = 
+	$mailer->FromName = 'YourName';
+	$mailer->From = 'YourGmail';
+	$mailer->AddAddress('emailYouAreSendingTo','NameOfPersonSendingTo');
+	$mailer->Subject = 'Subject';
+	$mailer->Body = 'body Text';
+	if(!$mailer->Send()){
+		echo "Message was not sent";
+		echo "Mailer Error: " . $email." ".$mailer->ErrorInfo;
+		exit;
+	}
+

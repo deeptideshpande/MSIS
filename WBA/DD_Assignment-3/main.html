@@ -1,0 +1,119 @@
+<html>
+	<head>
+		<script type='text/javascript'>
+		
+			var $=function(id){
+				return document.getElementById(id);
+			}
+			
+			var createXmlHttp=function(){
+			
+				if(window.XMLHttpRequest){
+					var xmlHttp=new XMLHttpRequest();
+				}
+				return xmlHttp;
+				
+			}
+			
+			var updateMessages=function(){
+				
+				var xmlHttp = createXmlHttp();
+
+				var lastMessageIdValue = $('lastMessageId').value;
+				
+				var sessionNameValue = $('sessionName').value;
+				
+				var url ='chat.php?messageId='+lastMessageIdValue+'&sessionName='+sessionNameValue;
+				
+				xmlHttp.open('GET',url,false);
+				
+				xmlHttp.send();
+				
+				var response = JSON.parse(xmlHttp.responseText);
+							
+				var noOfRecords = response.length;
+
+				for(var i=0;i<noOfRecords;i++){
+					var name = response[i]['name'];
+					var message = response[i]['message'];
+		
+					var newTr = document.createElement('tr');
+
+					var newTd = document.createElement('td');
+					newTd.innerHTML = name;
+					newTr.appendChild(newTd);
+		
+					var newTd = document.createElement('td');
+					newTd.innerHTML = message;
+					newTr.appendChild(newTd);
+		
+					$('table').appendChild(newTr);
+					
+					$('lastMessageId').value = parseInt(response[i]['messageId']);
+				}
+				
+			}
+						
+			var sessionHandle=function(){
+			
+				var xmlHttp = createXmlHttp();
+
+				var sessionNameValue = $('sessionName').value;
+				
+				var nameValue = $('name').value;
+				
+				var messageValue = $('message').value;
+
+				var url ='insert.php?sessionName='+sessionNameValue+'&name='+nameValue+'&message='+messageValue;
+				xmlHttp.open('GET',url,false);
+				xmlHttp.send();
+				
+				var response = xmlHttp.responseText;
+				
+				if (response) {
+					response='true';
+				}else{
+					response='false';
+				}
+				
+				$('insertError').innerHTML = response;
+				
+			}
+			
+			var stopChat=function(){
+				clearInterval(intervalHandle);
+			}
+			
+			window.onload=function(){
+				$('button').onclick=sessionHandle;
+				intervalHandle=setInterval(updateMessages, 3000);
+				$('stopChat').onclick=stopChat;
+				
+			}
+						
+		</script>
+	</head>
+	<body>
+
+		<table id='table'>
+			<tr><th>Name</th><th>Message</th></tr>
+		</table>
+	
+		<div id='messageError'>*</div>
+	
+		<input type='button' id='stopChat' value='Stop getting chat messages'>
+	
+		<input type='hidden' id='lastMessageId' value=0>
+	
+		Chat session you want to join<input type='text' id='sessionName'><br>
+	
+		Your name for the chat session<input type='text' id='name'><br>
+	
+		Message <input type='text' id='message'><br>
+	
+		<input type='button' id='button' value='Send'>
+	
+		<span id='insertError'></span>
+	
+	</body>
+</html>

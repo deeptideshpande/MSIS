@@ -1,0 +1,85 @@
+<!-- R Commander Markdown Template -->
+
+Replace with Main Title
+=======================
+
+### Your Name
+
+### `r as.character(Sys.Date())`
+
+```{r echo=FALSE}
+# include this code chunk as-is to set options
+opts_chunk$set(comment=NA, prompt=TRUE, out.width=750, fig.height=8, fig.width=8)
+library(Rcmdr)
+```
+
+```{r}
+data()
+```
+
+```{r}
+data(CCS, package="BCA")
+```
+
+```{r}
+CareerOptions <- read.table("/Users/Deepti/Downloads/careerOptions.xls", header=TRUE, sep="", 
+  na.strings="NA", dec=".", strip.white=TRUE)
+```
+
+```{r}
+careerOptions <- read.table("/Users/Deepti/Documents/MSIS/Data Mining/careerOptions.csv", 
+  header=TRUE, sep=",", na.strings="NA", dec=".", strip.white=TRUE)
+```
+
+```{r}
+HClust.1 <- hclust(dist(model.matrix(~-1 + Challenge+Family.Life+Financial+Learning+Location, careerOptions))^2 , method= "ward")
+plot(HClust.1, main= "Cluster Dendrogram for Solution HClust.1", xlab= "Observation Number in Data Set careerOptions", 
+  sub="Method=ward; Distance=squared-euclidian")
+```
+
+```{r}
+summary(as.factor(cutree(HClust.1, k = 2))) # Cluster Sizes
+by(model.matrix(~-1 + Challenge + Family.Life + Financial + Learning + Location, careerOptions), as.factor(cutree(HClust.1, k = 2)), colMeans) 
+  # Cluster Centroids
+bpCent(prcomp(model.matrix(~-1 + Challenge + Family.Life + Financial + Learning + Location, careerOptions)), cutree(HClust.1, k = 2), data.pts = TRUE, 
+  centroids = TRUE, xlabs = as.character(cutree(HClust.1, k = 2)))
+```
+
+```{r}
+data()
+```
+
+```{r}
+data(Athletic, package="BCA")
+```
+
+```{r}
+help(Athletic)
+```
+
+```{r}
+HClust.2 <- hclust(dist(model.matrix(~-1 + Attnd+Fem+Finan+Grad+Teams+Violat+Win, Athletic)) , method= "ward")
+plot(HClust.2, main= "Cluster Dendrogram for Solution HClust.2", xlab= "Observation Number in Data Set Athletic", 
+  sub="Method=ward; Distance=euclidian")
+```
+
+```{r}
+HClust.3 <- hclust(dist(model.matrix(~-1 + Attnd+Fem+Finan+Grad+Teams+Violat+Win, Athletic))^2 , method= "ward")
+plot(HClust.3, main= "Cluster Dendrogram for Solution HClust.3", xlab= "Observation Number in Data Set Athletic", 
+  sub="Method=ward; Distance=squared-euclidian")
+```
+
+```{r}
+summary(as.factor(cutree(HClust.3, k = 4))) # Cluster Sizes
+by(model.matrix(~-1 + Attnd + Fem + Finan + Grad + Teams + Violat + Win, Athletic), as.factor(cutree(HClust.3, k = 4)), colMeans) # Cluster Centroids
+bpCent(prcomp(model.matrix(~-1 + Attnd + Fem + Finan + Grad + Teams + Violat + Win, Athletic)), cutree(HClust.3, k = 4), data.pts = TRUE, centroids = 
+  TRUE, xlabs = as.character(cutree(HClust.3, k = 4)))
+```
+
+```{r}
+summary(as.factor(cutree(HClust.3, k = 4))) # Cluster Sizes
+by(model.matrix(~-1 + Attnd + Fem + Finan + Grad + Teams + Violat + Win, Athletic), as.factor(cutree(HClust.3, k = 4)), colMeans) # Cluster Centroids
+bpCent3d(prcomp(model.matrix(~-1 + Attnd + Fem + Finan + Grad + Teams + Violat + Win, Athletic)), cutree(HClust.3, k = 4), data.pts = TRUE, centroids 
+  = TRUE, xlabs = as.character(cutree(HClust.3, k = 4)))
+```
+

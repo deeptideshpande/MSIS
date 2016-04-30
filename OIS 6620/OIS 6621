@@ -1,0 +1,178 @@
+1. Rivalry
+2. Substitutes
+3. Suppliers
+4. Buyers
+5. Entrants
+6. Regulations
+
+V - Value
+R - Rarity
+I - Imitability
+O - Organization
+
+Intel’s case:
+
+cost is different than price
+
+lower cost(non differentiated)/more differentiation -> higher volume -> higher margin -> higher profit
+
+learning rate & growth rate —>> intel’s virtuous cycle
+
+Strategies at intel:
+1) product differentiation
+2) low cost
+
+Profit = (price/unit - cost/unit) * Units sold
+Margin = (price/unit - cost/unit)
+Differentiation = price/unit
+Lower cost = cost/unit
+
+copy exact = find the best way to do something and do that every time.
+
+learning rate is calculated on the assumption that nothing has changed in the manufacturing process.
+
+Huge advantage for electronics industries: 
+1) electronics are simple to build as compared to cars. Even if you have to improvise, it just means adding to more transistors to a chip. It doesn’t work the same way in cars.
+2) 70% learning rate in electronics vs 88% learning rate in automobiles.
+3) Transistor is just an on-off switch, cars have complex components. 
+4) We have doubled cumulative production so, so, so many times in transistors.
+5) Cost reduction is parallel with or similar to differentiation.
+
+Intel’s strategy is good as long as demand is steady.
+
+Encroachment Case:
+
+Disruptive innovation - start with inferior product and move up the market with new and improved product
+
+maximum amount you r willing to pay for a product is Reservation price.
+
+High end encroachment -
+
+Pnew = 800, Pold = 600
+
+Buy the product with greatest surplus.
+
+Surplus = Reservation price - actual price
+
+Characteristics of market where High end makes sense:
+1) When customers are more focussed on quality. Need keeps accelerating and customers are ready to pay for new and improved. what markets are ripe for high end strategy?
+
+Characteristics of market where Low end makes sense:
+1) Go to the customers where customers are new to the product. When the cost price is low and customers are willing to pay only less. sell inferior product. what markets are ripe for low end strategy?
+
+Process for developing new products:
+1)high quality
+2)customer needs - existing customers need “new n improved”, new segments of customers needs “alternate attributes with a derated product”.
+3)Research the market, reverse engineer whats out there, what already exists and know how to differentiate from that.
+4)Brainstorming (wide assortment)
+5)propose something practical (NPD funnel)
+6)Test a prototype(s)
+7)Create a specification
+8) Production plans(capacity, supply chain)
+9) go into production
+10) statistical process control
+11) customer feedback
+
+uitilization = R/mc
+where R = arrivals (demand rate)
+mc = capacity
+
+1) S curve diffusion as per reservation price perspective.
+2) profit drops slowly at first for old product (lull firm to sleep)
+3) greatly expand low end product
+4) don’t lose customer until diffusion well underway.
+5) low end firm has to be patient because profit grows slowly
+
+kind of setting for low end story
+1) there has to be a low end segment for which they r willing to take lesser performance.
+2) price sensitive low end customers (willing to trade performance for lower costs)
+3) when low end has a attribute (small size) which customer are ready to trade off for lower price
+
+kind of setting for high end story
+
+revenue management:
+1) operation capabilities
+2) customer has a strategy
+
+Plane has 134 seats
+1) how many seats can we sell it at full fare? some mean value depending upon historical data and some std deviation. we have data
+2) Overage - how much do i lose if i hold back too many? (loss - might fly with empty seats)
+3) Underage - how much do i loose if i hold back too few (loss - might lose on difference or profit) - 60
+4) overbooks - need to know how many no shows will be there? some mean value depending upon historical data and some std deviation.
+5) overage cost of overbooking - 200
+6) underage cost of overbooking - 
+
+2 questions:
+1) wen do we cut off the low fare? - 114
+2) wen do we cut off the full fare? - (at 146) 174
+overbook by 12 tickets i.e 146
+
+wat prof is looking for:
+for march 18 to 24 for next year - answer 1st question - deliverable
+assumptions - we have all the data.
+
+First graph the data
+
+possibility 1 -
+1) avg all the 365 numbers for mu and find sigma (std deviation)
+
+possibility 2
+1) avg only 7 numbers for those dates and find sigma of those 7 numbers
+
+possibility 3
+1) avg only march’s data but calculate each day of week separately
+
+possibility 4
+1) look for cyclicality
+
+hypothesis - flight for vacation 
+seven numbers per level
+
+level 1 - find mean n std deviation for 365 days
+level 2 - data set for each day of the week (7 booking limits)
+level 3 - use zero-one indicator variables for day of week (7 booking limits)
+level 4 - note seasonality. use zero-one indicator variables for day of week and season of the year.(7 booking limits)
+level 5 - 
+
+
+eliminate the seven wastes
+take out variability in arrivals - by setting constant takt time
+take out variability in processes - define a best process and do it that way all d time.
+
+
+Newsvendor:
+1) Cost of overage = Co = Discount fare = 114
+2) Cost of underage = Cu = Full fare - Discount fare = 174 - 146 = 60
+Pc = Cu/(Cu + Co) = 0.345
+z = Normsinv(0.345) = -0.4
+
+Revenue Management
+How to maximize your revenue given the capacity.
+1) data
+2) variations in willingness to pay
+3) perishability of the capacity
+
+Final exam
+Problem
+
+1) not happy with through put time (too long)
+2) not happy with through put rate (too small)
+3) work in process (too many)
+4) reduce defects (too many)
+5) increase customer satisfaction (too poor)
+Current Condition
+
+Current through put time is 170s
+Reduce the batch size to 1 then through put time will be 70s
+Add a second tech then through put time will be 170s
+remove travel time then through put time will be 150s
+
+capacity of system = capacity of bottleneck
+Set Goals
+1) low end of product line - ODM
+2) High end product (apple) - CM (its more bout the price of the product and its features)
+3) very very new product and nobody is making it - OEM or in house
+
+
+
+

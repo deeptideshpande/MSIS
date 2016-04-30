@@ -1,0 +1,42 @@
+1) Forms
+2) learn different buttons, text boxes, drop downs, listbox, submit button
+3) method = “posts” doesn’t append input in url.
+method = “get” appends input in the url.
+4) <form method=“get” action=“gotothispage.php”>
+action - specifies where the input of the form would go when u submit the form.
+5) <!—-comments—-> for documentation.
+6)Shared hosting (godaddy.com)
+=>Environment is fixed, i.e. OS version, applications installed are fixed for the most part. 
+=>You won’t get kernel level access and you won’t be able to install root level things.
+=>It is the cheapest and good to use when working in teams.
+=>Other instance may eat up your resources.
+
+Virtual dedicated/private hosting
+=>These are virtualized instances where you have limited control over kernel level things.
+
+Dedicated hosting (hivelocity.net)
+=>Security is your concern.
+=>qos is important.
+
+Cloud hosting
+=> Amazon Web Services
+=> Rackspace
+=> Azure
+
+7) Cookies are stored on the client side, i.e. in the browser of the user. Anyone can see cookies so your user can manipulate the values of cookies easily. But still we prefer cookies over sessions because we can scale our web server layer better. How? Because all of the identifying information is in the browser and it doesn’t matter if the user was initially sent to server 1 but now to server 10.
+8) Sessions are stored on the server side. It is not straight fwd to change session variables since they are on stored on the server side. It really matters. Because if the user was sent to server1 then the information resides on server1 and server 10 will not see it. At least not easy.
+9) Challenges of authentication:
+1) u don’t want to overwhelm your db. once user has been authenticated u do not want to authenticate the user again using database.
+2) wat kind of information you need to store for a cookie to authenticate with every request after first login.
+
+Essence of this idea: store all the basic ingredients in cookie but a secret recipe which only u know.
+so with every request you wud use the public information from cookies and also your secret recipe and then match the final dessert. Since outsiders do not know 
+3) wat kind of information u need to store for a session to authenticate with every request after first login.
+
+10) Login.php - it authenticates the user for the first time by matching recs with db.
+		it sets cookies
+11) Verify.php - it takes over login.php. it authenticates every request based on cookies.
+
+
+
+
